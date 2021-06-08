@@ -18,4 +18,9 @@
     <string name="reminder_verify">Bitte bestätigen Sie noch die E-Mail.</string>
     <string name="login_success">Login Erfolgreich</string>
 
+    <string name="fill_out">Ausfüllen</string>
+    <string name="reset_pw">Passwort zurückgesetzt</string>
+    <string name="send">Senden</string>
+    <string name="forgotPw_title">Passwort vergessen</string>
+    <string name="forgotPw_msg">Geben Sie Ihre Email ein.</string>
 </resources>

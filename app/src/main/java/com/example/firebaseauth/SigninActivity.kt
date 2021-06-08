@@ -2,11 +2,16 @@ package com.example.firebaseauth
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.InputType
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import splitties.alertdialog.alertDialog
+import splitties.alertdialog.cancelButton
+import splitties.alertdialog.positiveButton
 import splitties.toast.toast
 
 class SigninActivity : AppCompatActivity(), View.OnClickListener {
@@ -15,6 +20,7 @@ class SigninActivity : AppCompatActivity(), View.OnClickListener {
     private val btnRegister : Button by lazy{findViewById(R.id.btnRegister)}
     private val etEmail : EditText by lazy{findViewById(R.id.editTextEmail)}
     private val etPassword : EditText by lazy{findViewById(R.id.editTextPassword)}
+    private val textViewPWReset : TextView by lazy{findViewById(R.id.textViewPWReset)}
 
     private val mFirebaseAuth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
     private lateinit var mAuthListener: FirebaseAuth.AuthStateListener
@@ -25,6 +31,7 @@ class SigninActivity : AppCompatActivity(), View.OnClickListener {
 
         btnLogin.setOnClickListener(this)
         btnRegister.setOnClickListener(this)
+        textViewPWReset.setOnClickListener(this)
 
         mAuthListener = FirebaseAuth.AuthStateListener {
             val user = mFirebaseAuth.currentUser
@@ -57,6 +64,9 @@ class SigninActivity : AppCompatActivity(), View.OnClickListener {
                     email = etEmail.text.toString()
                     password = etPassword.text.toString()
                     register(email, password)
+                }
+                R.id.textViewPWReset -> {
+                    sendResetPw()
                 }
             }
         }
@@ -112,8 +122,42 @@ class SigninActivity : AppCompatActivity(), View.OnClickListener {
                         }
                     } else {
                         toast(it.exception!!.message.toString())
-                    }
                 }
+        }
+    }
+
+    private fun sendResetPw() {
+        val editTextEmail = EditText(applicationContext)
+        editTextEmail.inputType = InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
+        alertDialog(
+            title = getString(R.string.forgotPw_title),
+            message = getString(R.string.forgotPw_msg)
+
+
+        ) {
+            setView(editTextEmail)
+            positiveButton(R.string.send) {
+                val mail = editTextEmail.text.toString().trim()
+                if (mail.isEmpty()) {
+                    toast(R.string.fill_out)
+                    it.dismiss()
+                } else {
+                    sendMail(mail)
+                }
+            }
+            cancelButton()
+        }.show()
+    }
+
+    private fun sendMail(mail: String) {
+        mFirebaseAuth.sendPasswordResetEmail(mail)
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    toast(R.string.reset_pw)
+                } else {
+                    toast(it.exception!!.message.toString())
+                }
+            }
     }
 
 
