@@ -3,4 +3,19 @@
 
     <string name="logged_out">Ausgeloggt</string>
     <string name="logged_in">Eingeloggt</string>
+
+    <string name="alreadyLoggedIn">Sie sind schon eingelogged!</string>
+    <string name="alreadyLoggedOut">Sie sind schon ausgelogged!</string>
+
+    <string name="emailHint">Ihre Email-Adresse</string>
+    <string name="pwHint">Ihr Passwort</string>
+    <string name="buttonLogin">Login</string>
+    <string name="buttonRegister">Neuen Account registrieren</string>
+    <string name="textPWReset">Passwort vergessen</string>
+    <string name="required">Erfoderlich</string>
+
+    <string name="verify_mail">Eine Bestätigungsemail wurde versendet</string>
+    <string name="reminder_verify">Bitte bestätigen Sie noch die E-Mail.</string>
+    <string name="login_success">Login Erfolgreich</string>
+
 </resources>
