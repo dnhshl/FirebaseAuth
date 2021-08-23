@@ -16,11 +16,11 @@ import splitties.toast.toast
 
 class SigninActivity : AppCompatActivity(), View.OnClickListener {
 
-    private val btnLogin : Button by lazy{findViewById(R.id.btnLogin)}
-    private val btnRegister : Button by lazy{findViewById(R.id.btnRegister)}
-    private val etEmail : EditText by lazy{findViewById(R.id.editTextEmail)}
-    private val etPassword : EditText by lazy{findViewById(R.id.editTextPassword)}
-    private val textViewPWReset : TextView by lazy{findViewById(R.id.textViewPWReset)}
+    private val btnLogin : Button by lazy {findViewById(R.id.btnLogin)}
+    private val btnRegister : Button by lazy {findViewById(R.id.btnRegister)}
+    private val etEmail : EditText by lazy {findViewById(R.id.editTextEmail)}
+    private val etPassword : EditText by lazy {findViewById(R.id.editTextPassword)}
+    private val textViewPWReset : TextView by lazy {findViewById(R.id.textViewPWReset)}
 
     private val mFirebaseAuth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
     private lateinit var mAuthListener: FirebaseAuth.AuthStateListener
@@ -50,26 +50,26 @@ class SigninActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-        override fun onClick(v: View?) {
-            var email : String
-            var password : String
+    override fun onClick(v: View?) {
+        var email : String
+        var password : String
 
-            when (v?.id) {
-                R.id.btnLogin -> {
-                    email = etEmail.text.toString()
-                    password = etPassword.text.toString()
-                    signIn(email, password)
-                }
-                R.id.btnRegister -> {
-                    email = etEmail.text.toString()
-                    password = etPassword.text.toString()
-                    register(email, password)
-                }
-                R.id.textViewPWReset -> {
-                    sendResetPw()
-                }
+        when (v?.id) {
+            R.id.btnLogin -> {
+                email = etEmail.text.toString()
+                password = etPassword.text.toString()
+                signIn(email, password)
+            }
+            R.id.btnRegister -> {
+                email = etEmail.text.toString()
+                password = etPassword.text.toString()
+                register(email, password)
+            }
+            R.id.textViewPWReset -> {
+                sendResetPw()
             }
         }
+    }
 
     private fun validateForm(email: String, password: String): Boolean {
 
@@ -159,6 +159,4 @@ class SigninActivity : AppCompatActivity(), View.OnClickListener {
                 }
             }
     }
-
-
 }
